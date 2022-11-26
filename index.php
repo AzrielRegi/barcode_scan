@@ -1,3 +1,20 @@
+<?php
+session_start();
+
+
+if(isset($_SESSION['userid']))
+{
+    if($_SESSION['role_id']==2){
+
+        // dialihkan ke halaman kasir
+        header("location:kasir.php");
+    }
+} else {
+    $_SESSION['error'] = 'Anda harus login terlebih dahulu';
+    header('location:login.php');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,11 +33,8 @@
 <body>
     <div class="container">
         <h1>Welcome</h1>
-        <a href="barang.php">Barang</a>
-        <br>
-        <a href="role.php">Role</a>
-        <br>
-        <a href="user.php">User</a>
+        <a href="barang.php">Barang</a> | <a href="role.php">Role</a> | <a href="user.php">User</a> | 
+        <a href="logout.php">Logout</a>
     </div>
 </body>
 </html>

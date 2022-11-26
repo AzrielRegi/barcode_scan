@@ -1,6 +1,7 @@
 <?php
 include 'config.php';
 session_start();
+include 'authcheck.php';
 
 $view = $dbconnect->query("SELECT u.*,r.nama as nama_role FROM user as u INNER JOIN role as r ON u.role_id=r.id_role");
 
@@ -10,7 +11,7 @@ $view = $dbconnect->query("SELECT u.*,r.nama as nama_role FROM user as u INNER J
 
 <html>
 <head>
-    <tittle>List User</tittle>
+    <tittle></tittle>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" 
     integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
 </head>

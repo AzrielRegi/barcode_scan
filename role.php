@@ -1,6 +1,7 @@
 <?php
 include 'config.php';
 session_start();
+include 'authcheck.php';
 
 $view = $dbconnect->query("SELECT * FROM role");
 ?>

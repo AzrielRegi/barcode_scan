@@ -1,8 +1,10 @@
 <?php
 include 'config.php';
 session_start();
+include 'authcheck.php';
 
 $role = mysqli_query($dbconnect,"SELECT * FROM role");
+
 
 if (isset($_POST['simpan'])){
     $nama = $_POST['nama'];

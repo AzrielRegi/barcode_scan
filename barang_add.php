@@ -1,6 +1,7 @@
 <?php
 include 'config.php';
 session_start();
+include 'authcheck.php';
 
 if (isset($_POST['simpan'])){
     $nama = $_POST['nama'];

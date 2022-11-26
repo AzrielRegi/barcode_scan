@@ -1,7 +1,6 @@
 <?php
 include 'config.php';
-
-$role = mysqli_query($dbconnect,"SELECT * FROM role");
+include 'authcheck.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
