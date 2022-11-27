@@ -1,6 +1,5 @@
 <?php
 include 'config.php';
-include 'authcheck.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];

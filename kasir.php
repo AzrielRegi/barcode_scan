@@ -26,59 +26,61 @@ if(isset($_SESSION['cart']))
 </head>
 <body>
     <div class="container">
-        <div class="col-md-12">
-            <h1>Kasir</h1>
-            <H2>Hai <?=$_SESSION['nama']?></H2>
-            <a href="logout.php">Logout</a> | 
-            <a href="keranjang_reset.php">Reset Keranjang</a>
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Kasir</h1>
+                <h2>Hai <?=$_SESSION['nama']?></h2>
+                <a href="logout.php">Logout</a> | <a href="keranjang_reset.php">Reset Keranjang</a>
+            </div>
         </div>
-    </div>
-    <hr>
-    <div class="row">
-        <div class="col-md-8">
-            <form method="post" action="keranjang_act.php" class="form-inline">
-            <div class="input-group">
-                    <select name="id_barang" class="form-control">
-                        <option value="">Pilih barang</option>
-                        <?php while ($row = mysqli_fetch_array($barang)) {?>
-                            <option value="<?=$row['id_barang']?>"><?=$row['nama']?></option>
-                        <?php } ?>
-                    </select>
-                </div>
-                    <input type="number" name="qty" class="form-control" placeholder="Jumlah">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit">Tambah</button>
-                    </span>
-                </div>
-            </form>
-            <br>
-            <form method="POST" action="keranjang_update.php">
-            <table class="table table-bordered">
-                <tr>
-                    <td>Nama</td>
-                    <td>Harga</td>
-                    <td>Jumlah</td>
-                    <td>Sub Total</td>
-                    <td></td>
-                </tr>
-                <?php foreach ($_SESSION['cart'] as $key => $value) { ?>
+        <hr>
+        <div class="row">
+            <div class="col-md-8">
+                <form method="POST" action="Keranjang_act.php" class="form-inline">
+                <div class="input-group">
+                        <select class="form-control" name="id_barang">
+                            <option value="">Pilih Barang</option>
+                                <?php while ($row = mysqli_fetch_array($barang)) { ?>
+                                    <option value="<?=$row['id_barang']?>"><?=$row['nama']?></option>
+                                <?php } ?>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <input type="number" name="qty" class="form-control" placeholder="Jumlah">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary" type="submit">Tambah</button>
+                        </span>
+                    </div>
+                </form>
+                <br>
+                <form method="POST" action="keranjang_update.php">
+                <table class="table table-bordered">
                     <tr>
-                        <td><?=$value['nama']?></td>
-                        <td align="right"><?=number_format($value['harga'])?></td>
-                        <td class="col-md-2"><input type="number" name="qty[]" value="<?=$value['qty']?>"
-                        class="form-control"></td>
-                        <td align="right"><?=number_format($value['qty']*$value['harga'])?></td>
-                        <!-- <td><a href="keranjang_hapus.php?id=<?=$value['id']?>" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td> -->
+                        <td>Nama Barang</td>
+                        <td>Harga</td>
+                        <td>Jumlah</td>
+                        <td>Sub Total</td>
+                        <td></td>
                     </tr>
+                    <?php foreach ($_SESSION['cart'] as $key => $value) { ?>
+                        <tr>
+                            <td><?=$value['nama']?></td>
+                            <td align="right"><?=number_format($value['harga'])?></td>
+                            <td class="col-md-2"><input type="number" name="qty" value="<?=$value['qty']?>"
+                            class="form-control"></td>
+                            <td align="right"><?=number_format($value['qty']*$value['harga'])?></td>
+
+                            <td><a href="keranjang_hapus.php?id=<?=$value['id']?>" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>
+                        </tr>
                     <?php } ?>
-            </table>
-            <button type="submit" class="btn btn-success">Perbaharui</button>
-            </form>
-        </div>
-        <div class="col-md4">
-            <h1> Total Rp. <?=number_format($sum)?></h1>
+                </table>
+                <button type="submit" class="btn btn-success">Update</button>
+                </form>
+            </div>
+            <div class="col-md-4">
+                <h3>Total Rp. <?=number_format($sum)?></h3>
+            </div>
         </div>
     </div>
-    
 </body>
 </html>
