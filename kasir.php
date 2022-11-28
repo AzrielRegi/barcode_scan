@@ -66,11 +66,12 @@ if(isset($_SESSION['cart']))
                         <tr>
                             <td><?=$value['nama']?></td>
                             <td align="right"><?=number_format($value['harga'])?></td>
-                            <td class="col-md-2"><input type="number" name="qty" value="<?=$value['qty']?>"
+                            <td class="col-md-2"><input type="number" name="qty[]" value="<?=$value['qty']?>"
                             class="form-control"></td>
                             <td align="right"><?=number_format($value['qty']*$value['harga'])?></td>
 
-                            <td><a href="keranjang_hapus.php?id=<?=$value['id']?>" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i></a></td>
+                            <td><a href="keranjang_hapus.php?id=<?=$value['id']?>" class="btn btn-danger">
+                            <i class="glyphicon glyphicon-remove"></i></a></td>
                         </tr>
                     <?php } ?>
                 </table>
@@ -79,8 +80,50 @@ if(isset($_SESSION['cart']))
             </div>
             <div class="col-md-4">
                 <h3>Total Rp. <?=number_format($sum)?></h3>
+                <form action="transaksi_act.php" method="POST">
+                    <input type="hidden" name="total" value="<?=$sum?>">
+                <div class="form-group">
+                    <label>Bayar</label>
+                    <input type="text" id="bayar" name="bayar" class="form-control">
+                </div>
+                <button class="btn btn-primary" type="submit">Selesai</button>
+                </form>
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+        var bayar = document.getElementById('bayar');
+
+        bayar.addEventListener('keyup', function (e){  
+            bayar.value = formatRupiah(this.value, 'Rp. ');
+            // harga = cleanRupiah(dengan_rupiah.value);
+            // calculate(harga,service.value);
+        });
+
+        // untuk generate inputan angka menjadi format rupiah
+        function formatRupiah(angka, prefix) {
+            var number_string = angka.replace(/[^,\d]/g, '').toString(),
+                split = number_string.split(','),
+                sisa = split[0].length % 3,
+                rupiah = split[0].substr(0, sisa),
+                ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+            if (ribuan) {
+                separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
+        }
+
+        // Generate dari inputan rupiah menjadi angka
+        function cleanRupiah(rupiah) {
+            var clean = rupiah.replace(/\D/g, '');
+            return clean;
+            // console.log(clean)
+        }
+
+    </script>
 </body>
 </html>

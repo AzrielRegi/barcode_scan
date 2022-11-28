@@ -8,7 +8,7 @@ if(isset($_POST['id_barang']))
     $id_barang = $_POST['id_barang'];
     $qty = $_POST['qty'];
 
-    $data = mysqli_query($dbconnect, "SELECT * FROM barang WHERE id_barang='$id_barang'");
+    $data = mysqli_query($dbconnect,"SELECT * FROM barang WHERE id_barang='$id_barang'");
     // echo var_dimp [$data];
     // return false;
 

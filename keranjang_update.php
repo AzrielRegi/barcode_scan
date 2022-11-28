@@ -4,7 +4,7 @@ session_start();
 include 'authcheckkasir.php';
 
 $qty = $_POST['qty'];
-// print_r($_SESSION['cart']);
+// print_r($qty);
 
 foreach ($_SESSION['cart'] as $key => $value) {
     $_SESSION['cart'][$key]['qty'] = $qty[$key];
