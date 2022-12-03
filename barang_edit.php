@@ -1,5 +1,6 @@
 <?php
 include 'config.php';
+require 'asset/vendor/autoload.php';
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];

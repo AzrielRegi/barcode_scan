@@ -2,7 +2,7 @@
 include 'config.php';
 session_start();
 include 'authcheck.php';
-
+require 'asset/vendor/autoload.php';
 
 $view = $dbconnect->query("SELECT * FROM barang");
 ?>
@@ -34,6 +34,7 @@ $view = $dbconnect->query("SELECT * FROM barang");
         <table class="table table-bordered">
             <tr>
                 <th>ID Barang</th>
+                <th>Barcode</th>
                 <th>Nama</th>
                 <th>Harga</th>
                 <th>Jumlah</th>
@@ -46,6 +47,11 @@ $view = $dbconnect->query("SELECT * FROM barang");
 
             <tr>
                 <td><?= $row['id_barang']?></td>
+                <td align="center"><?php 
+                    $generator = new Picqer\Barcode\BarcodeGeneratorPNG();
+                    echo '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($row['id_barang'], $generator::TYPE_CODE_128)) . '">';
+                ?>
+                </td>
                 <td><?= $row['nama']?></td>
                 <td><?= $row['harga']?></td>
                 <td><?= $row['jumlah']?></td>
