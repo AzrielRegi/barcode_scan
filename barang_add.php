@@ -5,11 +5,12 @@ include 'authcheck.php';
 
 if (isset($_POST['simpan'])){
     $nama = $_POST['nama'];
+    $kode_barang = $_POST['kode_barang'];
     $harga = $_POST['harga'];
     $jumlah = $_POST['jumlah'];
 
     //menyimpan kedalam database
-    mysqli_query($dbconnect, "INSERT INTO barang VALUES ('', '$nama', '$harga', '$jumlah')");
+    mysqli_query($dbconnect, "INSERT INTO barang VALUES (NULL, '$nama', '$harga', '$jumlah', '$kode_barang')");
 
     $_SESSION['success'] = 'Berhasil menambahkan data';
 
@@ -35,6 +36,10 @@ if (isset($_POST['simpan'])){
             <div class="form-grup">
                 <label>Nama Barang</label>
                 <input type="text" name="nama" class="form-control" placeholder="Nama Barang">
+            </div>
+            <div class="form-grup">
+                <label>Kode Barang</label>
+                <input type="text" name="kode-barang" class="form-control" placeholder="Kode Barang">
             </div>
             <div class="form-grup">
                 <label>Harga</label>
